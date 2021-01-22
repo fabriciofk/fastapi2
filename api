@@ -1,0 +1,170 @@
+* / validarToken - validar o token do usuário.
+
+Receber: token_usuario - string - body
+
+Devolver: código de status (200/300/400)
+
+* / validarVeiculo
+
+Receber: placa - string - parâmetros de consulta
+
+Devolver: código de status (200/300/400)
+
+* / validarCartao
+
+Receber: cartão_hash - string - corpo
+
+Devolver: código de status (200/300/400)
+
+/ gerarToken -> Verificar o e-mail ea senha fornecida e retornar um token.
+
+Receber: email - string - body
+	 senha - string - corpo
+
+Devolver: token_ administrador - string
+
+/ retornarSaldo -> Retornar o saldo do usuário com base no token.
+
+Receber: token_ chefe - string - body
+
+Devolver: saldo - float
+
+/ retornarVeiculos -> Retornar os veiculos que possui usuário.
+
+Receber: token_ chefe - string - body
+
+Devolver: placa_veiculo - string
+	  modelo - string
+
+
+/ cadastrarUsuário -> receber informações do usuário e cadastrar o usuário no banco.
+
+Receber: nome - string - corpo
+	 email - string - corpo
+	 telefone - string - corpo
+	 senha - string - corpo
+	 numero_documento - string - corpo
+	 tipo_documento - string / enum - corpo
+
+
+Devolver: código de status (200/300/400)
+
+
+/ cadastrarVeículo -> receber informações do veículo e cadastrar o veículo no banco.
+
+Receber: placa - string - body
+	 modelo - string - corpo
+ 	 tipo_veiculo - string / enum - corpo
+	 id_usuario - int - corpo
+
+Devolver: código de status (200/300/400)
+
+/ fazerRegarga -> receber as informações da recarga (valor, informações de pagamento).
+
+Receber: valor - float - body
+	 hash_cartão - string - corpo
+	 token_usuario - string - corpo
+
+Devolver: código de status (200/300/400)
+
+/ editarUsuario -> Receber as novas informações do usuário e fazer mudanças no banco.
+
+Receber: id_usuario - parâmetros de consulta
+	 nome - string - corpo
+	 email - string - corpo
+	 telefone - string - corpo
+	 senha - string - corpo
+	 numero_documento - string - corpo
+	 tipo_documento - string / enum - corpo
+
+
+Devolver: código de status (200/300/400)
+
+
+/ editarVeiculo -> Receber as novas informações do veículo e fazer mudanças no banco.
+
+Receber: placa - string - parâmetros de consulta
+	 modelo - string - corpo
+	 tipo_veiculo - string / enum - corpo
+	 id_usuario - int - corpo
+
+Devolver: código de status (200/300/400)
+
+/ editarCartao -> Receber as novas informações do cartão e fazer mudanças no banco.
+
+Receber: cartão_hash - string - corpo
+	 bandeira - string - corpo
+	 ultimos_digitos - int - corpo
+	 id_usuario - int - corpo
+
+Devolver: código de status (200/300/400)
+
+/ cadastrarCartao -> Receber as informações do cartão e cadastrar no banco.
+
+Receber: cartão_hash - string - corpo
+	 bandeira - string - corpo
+	 ultimos_digitos - int - corpo
+	 id_usuario - int - corpo
+
+Devolver: código de status (200/300/400)
+
+/ consultarReservaFuncionario -> Receber a placa do veiculo e retornar as informações da reserva (Hora inicio e hora fim) e as informações do veículo.
+
+Receber: placa_veiculo - string - parâmetros de consulta
+
+Devolver: hora_inicio - date_time
+	  hora_fim - data_hora
+
+/ consultarReservaUsuario -> Receber a placa do veiculo e devolve informações da reserva (hora inicio e hora fim).
+
+Receber: placa_veiculo - string - parâmetros de consulta
+
+Devolver: hora_inicio - date_time
+	  hora_fim - data_hora
+
+/ reservarVaga -. receber os dados do usuário e do veículo a ser estacionado
+Receber: hash_usuario - string - body
+	 id_veiculo - parâmetros intquery
+	 hora_inicio - date_time - parâmetros de consulta
+
+Devolver: hora_fim - data_hora
+
+/ excluirUsuario -> Receber o token do usuário e excluí-lo
+
+Receber: token_ chefe - string - body
+
+Devolver: código de status (200/300/400)
+
+/ excluirVeiculo -> Receber a placa do veículo e excluí-lo
+
+Receber: placa_carro - string - parâmetros de consulta
+
+Devolver: código de status (200/300/400)
+
+/ excluirCartao -> Receber o hash do cartão e excluí-lo
+
+Receber: cartão_hash - string - corpo
+
+Devolver: código de status (200/300/400)
+
+/ recuperarSenha ->
+
+
+
+
+@router.delete("/{id}", response_description="delete_carro data deleted from the database")
+async def delete_carro_data(placa: str):
+    deletede_carro = await delete_carro(str)
+    if deletede_carro:
+        return ResponseModel(
+            "carro with placa: {} removed".format(id), "carro deleted successfully"
+        )
+    return ErrorResponseModel(
+        "An error occurred", 404, "carro with placa {0} doesn't exist".format(id)
+    )
+
+
+
+
+
+
